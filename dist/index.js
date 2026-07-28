@@ -54402,7 +54402,7 @@ async function validateSubscription() {
         if ((0, axios_1.isAxiosError)(error) && error.response?.status === HTTP_FORBIDDEN) {
             core.error(`\u001B[1;31mThis action requires a StepSecurity subscription for private repositories.\u001B[0m`);
             core.error(`\u001B[31mLearn how to enable a subscription: ${docsUrl}\u001B[0m`);
-            throw new Error('StepSecurity subscription required for private repositories.');
+            process.exit(1);
         }
         core.info('Timeout or API not reachable. Continuing to next step.');
     }
