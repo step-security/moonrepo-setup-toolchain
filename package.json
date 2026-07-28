@@ -30,7 +30,7 @@
     "@types/node": "^24.3.0",
     "@vercel/ncc": "^0.38.3",
     "eslint": "^8.56.0",
-    "eslint-config-moon": "^2.0.13",
+    "eslint-config-moon": "^4.0.4",
     "prettier": "^3.6.2",
     "prettier-config-moon": "^1.2.1",
     "ts-node": "^10.9.2",
