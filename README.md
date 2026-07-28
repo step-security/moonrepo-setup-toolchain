@@ -1,1 +1,45 @@
-# moonrepo-setup-toolchain
+[![StepSecurity Maintained Action](https://raw.githubusercontent.com/step-security/maintained-actions-assets/main/assets/maintained-action-banner.png)](https://docs.stepsecurity.io/actions/stepsecurity-maintained-actions)
+
+# Setup proto and moon toolchains
+
+A GitHub action that sets up an environment for proto and moon.
+
+- Installs `proto` globally so that installed tools can also be executed globally.
+- Conditionally installs `moon` globally if the repository is using moon (attempts to detect a
+  `.moon` directory), or `moon-version` is set.
+- Caches the toolchain (`~/.proto`) so subsequent runs are faster.
+- Hashes `.prototools` and `.moon/toolchain.yml` files to generate a unique cache key.
+- Cleans the toolchain before caching to remove unused or stale tools.
+
+## Installation
+
+```yaml
+# ...
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: step-security/moonrepo-setup-toolchain@v0
+        with:
+          auto-install: true
+      - run: moon ci
+```
+
+## Inputs
+
+- `auto-install` - Auto-install proto tools by running `proto install`. Defaults to `false`.
+- `auto-setup` - Auto-setup moon toolchains by running `moon setup`. Defaults to `false`.
+- `cache` - Toggle caching of the toolchain directory. Defaults to `true`.
+- `cache-base` - Base branch/ref to save a warmup cache on. Other branches/refs will restore from
+  this base.
+- `cache-version` - Version of the cache. Can be used to invalidate keys.
+- `moon-version` - Version of moon to explicitly install. Version will be extracted from
+  `.prototools`.
+- `proto-version` - Version of proto to explicitly install. Version will be extracted from
+  `.moon/toolchain.yml`.
+- `workspace-root` - Relative path to moon's workspace root if initialized in a sub-directory.
+  Defaults to "".
