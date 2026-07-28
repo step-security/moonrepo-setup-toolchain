@@ -204,7 +204,7 @@ export async function installBin(bin: string) {
 	core.info(`Installing \`${bin}\` globally`);
 
 	const version =
-		// eslint-disable-next-line no-nested-ternary
+		 
 		bin === 'proto' ? getProtoVersion() : bin === 'moon' ? getMoonVersion() : 'latest';
 
 	const scriptName = WINDOWS ? `${bin}.ps1` : `${bin}.sh`;
@@ -222,7 +222,7 @@ export async function installBin(bin: string) {
 		scriptPath,
 	);
 
-	// eslint-disable-next-line no-magic-numbers
+	 
 	await fs.promises.chmod(script, 0o755);
 
 	core.info(`Downloaded script to ${script}`);
@@ -250,7 +250,7 @@ export async function installBin(bin: string) {
 		if (result.stdout) {
 			const v = result.stdout.replace(bin, '').trim();
 
-			// eslint-disable-next-line require-atomic-updates
+			 
 			process.env[`${envPrefix}_CLI_VERSION`] = v;
 			core.saveState(`${envPrefix}_CLI_VERSION`, v);
 

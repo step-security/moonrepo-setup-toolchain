@@ -1,0 +1,3 @@
+[[IgnoredVulns]]
+id = "GHSA-mh99-v99m-4gvg"
+reason = "brace-expansion is only used by eslint (dev dependency) for glob matching; no user-controlled input reaches it in this action"

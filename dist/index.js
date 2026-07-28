@@ -54283,9 +54283,7 @@ function getMoonVersion() {
 }
 async function installBin(bin) {
     core.info(`Installing \`${bin}\` globally`);
-    const version = 
-    // eslint-disable-next-line no-nested-ternary
-    bin === 'proto' ? getProtoVersion() : bin === 'moon' ? getMoonVersion() : 'latest';
+    const version = bin === 'proto' ? getProtoVersion() : bin === 'moon' ? getMoonVersion() : 'latest';
     const scriptName = exports.WINDOWS ? `${bin}.ps1` : `${bin}.sh`;
     const scriptPath = node_path_1.default.join(getProtoHome(), 'temp', scriptName);
     // If the installer already exists, delete it and ensure were using the latest
@@ -54294,7 +54292,6 @@ async function installBin(bin) {
     }
     core.info('Downloading installation script');
     const script = await tc.downloadTool(`https://raw.githubusercontent.com/moonrepo/moon/refs/heads/master/website/static/install/${scriptName}`, scriptPath);
-    // eslint-disable-next-line no-magic-numbers
     await node_fs_1.default.promises.chmod(script, 0o755);
     core.info(`Downloaded script to ${script}`);
     core.info('Executing installation script');
@@ -54313,7 +54310,6 @@ async function installBin(bin) {
         const result = await (0, execa_1.default)(binPath, ['--version'], { stdio: 'pipe' });
         if (result.stdout) {
             const v = result.stdout.replace(bin, '').trim();
-            // eslint-disable-next-line require-atomic-updates
             process.env[`${envPrefix}_CLI_VERSION`] = v;
             core.saveState(`${envPrefix}_CLI_VERSION`, v);
             core.info(result.stdout);
@@ -54455,7 +54451,6 @@ async function run() {
         core.setFailed(error);
     }
 }
-// eslint-disable-next-line unicorn/prefer-top-level-await
 void run();
 
 
